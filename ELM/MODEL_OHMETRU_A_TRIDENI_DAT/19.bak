@@ -1,0 +1,1097 @@
+(saveFormat "7.0")
+(date "Sat 18/Nov/2023 09:52:29 ")
+(veerev "9.33.1811.0201")
+(platform "PC")
+(execMode v6)
+(prefExecMode v9)
+(filterNAN 0)
+(workspaceStackingOrder M)
+(sysconfig)
+(SaveCF no)
+(device 0 ROOTCONTEXT
+(properties
+(variableName Main)
+(variableScope glob)
+(trigMode deg)
+(nextID 48)
+(popupTitleText "Untitled")
+(popupMoveable 1))
+(deviceList
+(device 0 TIMESTAMPCONSTANT
+(properties
+(name "Date/Time")
+(variableScope cont)
+(enableEditing 1))
+(interface
+(output 1
+(name "Date/Time")
+(lock name constraints)))
+(implementation
+(value Real
+(data  63835891529.298))
+(initValue Real
+(data  0))))
+(device 2 FORMULA
+(properties
+(name "random(1-1M)")
+(variableScope cont)
+(expr 1 "random(1,1M)"))
+(interface
+(output 1
+(name "Result")
+(tag "Result")
+(lock name constraints)
+(optional yes))))
+(device 3 CONSTANT
+(properties
+(name "E12")
+(variableScope cont)
+(enableEditing 1))
+(interface
+(output 1
+(name "Real64")
+(lock name constraints)))
+(implementation
+(value Real
+(numDims 1)
+(size 13)
+(data  [ 1 1.2 1.5 1.8 2.2 2.7 3.3 3.9 4.7 5.6 6.8 8.199999999999999 10 ]))
+(initValue Real
+(data  0))))
+(device 4 CONSTANT
+(properties
+(name "E24")
+(variableScope cont)
+(enableEditing 1))
+(interface
+(output 1
+(name "Real64")
+(lock name constraints)))
+(implementation
+(value Real
+(numDims 1)
+(size 25)
+(data  [ 1 1.1 1.2 1.3 1.5 1.6 1.8 2 2.2 2.4 2.7 3 3.3 3.6 3.9 4.3 4.7 5.1 5.6
+6.2 6.8 7.5 8.199999999999999 9.1 10 ]))
+(initValue Real
+(data  0))))
+(device 8 FORRANGE
+(properties
+(name "MOCNINA")
+(variableScope cont)
+(from 0)
+(thru 6)
+(step 1))
+(interface
+(output 1
+(name "Data")
+(lock name constraints))))
+(device 6 IFTHENELSE
+(properties
+(variableScope cont)
+(cases 1 "10^A<=B AND B<10^(A+1)"))
+(interface
+(input 1
+(name "A")
+(optional yes))
+(input 2
+(name "B")
+(optional yes))
+(output 1
+(name "Then")
+(lock name constraints))
+(output 2
+(name "Else")
+(lock name constraints))))
+(device 9 TOGLOBAL
+(properties
+(name "Set RAD")
+(variableScope cont)
+(globalName "RAD"))
+(interface
+(input 1
+(name "Data")
+(tag "Data")
+(lock name))))
+(device 10 MESSAGEBOX
+(properties
+(variableScope cont)
+(message "VYBER RADU")
+(symbol Exclamation))
+(interface
+(output 1
+(name "E12")
+(lock name constraints))
+(output 2
+(name "E24")
+(lock name constraints)))
+(implementation
+(customButtons 1)
+(displayMode 3)
+(buttons "<Custom...>")
+(buttonLabel1 "E12")
+(buttonLabel2 "E24")
+(buttonLabel3 "")
+(bdefault "E12")))
+(device 11 FORMULA
+(properties
+(name "UMOCNENA_NORM_HOD")
+(variableScope cont)
+(expr 1 "E12[INDEX]*10^RAD"))
+(interface
+(input 1
+(name "INDEX")
+(optional yes))
+(input 2
+(name "E12")
+(optional yes))
+(output 1
+(name "Result")
+(tag "Result")
+(lock name constraints)
+(optional yes))))
+(device 12 FORRANGE
+(properties
+(name "INDEX 0-12")
+(variableScope cont)
+(from 0)
+(thru 12)
+(step 1))
+(interface
+(output 1
+(name "Data")
+(lock name constraints))))
+(device 13 SEQUENCER
+(properties
+(variableScope cont)
+(transactions 2
+"POROVNANI LOGEN TESTEX:RANDOM_R \tPTOLEX: 5 LT E12 GT 5 \tPASSOP TRTN:5 \t"
+"POROVNANI2 LOGEN TESTEX:RANDOM_R \tPTOLEX: 10 LT E12 GT 10 \tPASSOP TRTN:10 \t"
+))
+(interface
+(input 1
+(name "E12")
+(optional yes))
+(output 1
+(name "Return")
+(tag "Return")
+(lock name constraints)
+(optional yes))
+(output 2
+(name "Log")
+(tag "Log")
+(lock name constraints)
+(optional yes)))
+(implementation
+(logfields "name" "pass" "result")))
+(device 14 TEXTDISPLAY
+(properties
+(name "TOLERANCE")
+(variableScope cont))
+(interface
+(input 1
+(name "Data"))))
+(device 15 IFTHENELSE
+(properties
+(variableScope cont)
+(cases 1 "A>0"))
+(interface
+(input 1
+(name "A")
+(optional yes))
+(output 1
+(name "Then")
+(lock name constraints))
+(output 2
+(name "Else")
+(lock name constraints))))
+(device 16 TEXTDISPLAY
+(properties
+(name "RANDOM")
+(variableScope cont))
+(interface
+(input 1
+(name "Data"))))
+(device 17 TOGLOBAL
+(properties
+(name "Set TOLERANCE")
+(variableScope cont)
+(globalName "TOLERANCE"))
+(interface
+(input 1
+(name "Data")
+(tag "Data")
+(lock name))))
+(device 18 TOGLOBAL
+(properties
+(name "Set EXX")
+(variableScope cont)
+(globalName "EXX"))
+(interface
+(input 1
+(name "Data")
+(tag "Data")
+(lock name))))
+(device 19 TEXTDISPLAY
+(properties
+(name "NORM_HOD")
+(variableScope cont))
+(interface
+(input 1
+(name "Data"))))
+(device 20 FORRANGE
+(properties
+(name "INDEX 0-24")
+(variableScope cont)
+(from 0)
+(thru 24)
+(step 1))
+(interface
+(output 1
+(name "Data")
+(lock name constraints))))
+(device 21 FORMULA
+(properties
+(name "UMOCNENA_NORM_HOD")
+(variableScope cont)
+(expr 1 "E24[INDEX]*10^RAD"))
+(interface
+(input 1
+(name "INDEX")
+(optional yes))
+(input 2
+(name "E24")
+(optional yes))
+(output 1
+(name "Result")
+(tag "Result")
+(lock name constraints)
+(optional yes))))
+(device 22 SEQUENCER
+(properties
+(variableScope cont)
+(transactions 2
+"POROVNANI LOGEN TESTEX:RANDOM_R \tPTOLEX: 2 LT E24 GT 2 \tPASSOP TRTN:2 \t"
+"POROVNANI2 LOGEN TESTEX:RANDOM_R \tPTOLEX: 5 LT E24 GT 5 \tPASSOP TRTN:5 \t"))
+(interface
+(input 1
+(name "E24")
+(optional yes))
+(output 1
+(name "Return")
+(tag "Return")
+(lock name constraints)
+(optional yes))
+(output 2
+(name "Log")
+(tag "Log")
+(lock name constraints)
+(optional yes)))
+(implementation
+(logfields "name" "pass" "result")))
+(device 23 JUNCTION
+(properties
+(name "JCT")
+(variableScope cont))
+(interface
+(input 1
+(name "A"))
+(input 2
+(name "B"))
+(output 1
+(name "Data"))))
+(device 24 JUNCTION
+(properties
+(name "JCT")
+(variableScope cont))
+(interface
+(input 1
+(name "A"))
+(input 2
+(name "B"))
+(output 1
+(name "Data"))))
+(device 25 TOGLOBAL
+(properties
+(name "Set RANDOM_R")
+(variableScope cont)
+(globalName "RANDOM_R"))
+(interface
+(input 1
+(name "Data")
+(tag "Data")
+(lock name))))
+(device 26 TEXTDISPLAY
+(properties
+(name "VYSLEDEK")
+(variableScope cont)
+(isIndexingEnabled 0))
+(interface
+(input 1
+(name "Data"))))
+(device 27 COLLECTOR
+(properties
+(variableScope cont)
+(output1D 0))
+(interface
+(input 1
+(name "Data")
+(tag "Data"))
+(input 2
+(type trigger)
+(name "XEQ")
+(lock name constraints))
+(output 1
+(name "Array")
+(tag "Array"))))
+(device 28 LITERALCONSTANT
+(properties
+(name "Z\301HLAV\315")
+(variableScope cont)
+(enableEditing 1))
+(interface
+(output 1
+(name "Text")
+(lock name constraints)))
+(implementation
+(value Text
+(numDims 1)
+(size 4)
+(data  [ "RANDOM_R" "R_NOM" "TOLERANCE" "RADA" ]))
+(initValue Text
+(data  ""))))
+(device 29 JUNCTION
+(properties
+(name "JCT")
+(variableScope cont))
+(interface
+(input 1
+(name "A"))
+(input 2
+(name "B"))
+(output 1
+(name "Data"))))
+(device 30 SLIDINGWINDOW
+(properties
+(variableScope cont)
+(vecSize 4)
+(triggerSize 4))
+(interface
+(input 1
+(name "Data")
+(tag "Data")
+(requires
+(shape "Scalar"))
+(lock constraints))
+(output 1
+(name "Array")
+(tag "Array"))))
+(device 31 FROMGLOBAL
+(properties
+(name "Get RANDOM_R")
+(variableScope cont)
+(globalName "RANDOM_R"))
+(interface
+(output 1
+(name "Data")
+(tag "Data")
+(lock name constraints))))
+(device 32 FROMGLOBAL
+(properties
+(name "Get EXX")
+(variableScope cont)
+(globalName "EXX"))
+(interface
+(output 1
+(name "Data")
+(tag "Data")
+(lock name constraints))))
+(device 33 FROMGLOBAL
+(properties
+(name "Get TOLERANCE")
+(variableScope cont)
+(globalName "TOLERANCE"))
+(interface
+(output 1
+(name "Data")
+(tag "Data")
+(lock name constraints))))
+(device 35 TOGLOBAL
+(properties
+(name "Set RADA")
+(variableScope cont)
+(globalName "RADA"))
+(interface
+(input 1
+(name "Data")
+(tag "Data")
+(lock name))))
+(device 36 CONSTANT
+(properties
+(name "E12")
+(variableScope cont)
+(enableEditing 1))
+(interface
+(output 1
+(name "Real64")
+(lock name constraints)))
+(implementation
+(value Real
+(data  12))
+(initValue Real
+(data  0))))
+(device 37 CONSTANT
+(properties
+(name "E24")
+(variableScope cont)
+(enableEditing 1))
+(interface
+(output 1
+(name "Real64")
+(lock name constraints)))
+(implementation
+(value Real
+(data  24))
+(initValue Real
+(data  0))))
+(device 38 JUNCTION
+(properties
+(name "JCT")
+(variableScope cont))
+(interface
+(input 1
+(name "A"))
+(input 2
+(name "B"))
+(output 1
+(name "Data"))))
+(device 39 FROMGLOBAL
+(properties
+(name "Get RADA")
+(variableScope cont)
+(globalName "RADA"))
+(interface
+(output 1
+(name "Data")
+(tag "Data")
+(lock name constraints))))
+(device 40 JUNCTION
+(properties
+(name "JCT")
+(variableScope cont))
+(interface
+(input 1
+(name "A")
+(optional yes))
+(input 2
+(name "B")
+(optional yes))
+(input 3
+(name "C")
+(optional yes))
+(input 4
+(name "D")
+(optional yes))
+(output 1
+(name "Data"))))
+(device 41 TOGLOBAL
+(properties
+(name "Set TOLERANCE")
+(variableScope cont)
+(globalName "TOLERANCE"))
+(interface
+(input 1
+(name "Data")
+(tag "Data")
+(lock name))))
+(device 42 LITERALCONSTANT
+(properties
+(name "NEEXISTUJE")
+(variableScope cont)
+(enableEditing 1))
+(interface
+(output 1
+(name "Text")
+(lock name constraints)))
+(implementation
+(value Text
+(data  "NEEXISTUJE"))
+(initValue Text
+(data  ""))))
+(device 43 TOGLOBAL
+(properties
+(name "Set EXX")
+(variableScope cont)
+(globalName "EXX"))
+(interface
+(input 1
+(name "Data")
+(tag "Data")
+(lock name))))
+(device 44 LITERALCONSTANT
+(properties
+(name "NEEXISTUJE")
+(variableScope cont)
+(enableEditing 1))
+(interface
+(output 1
+(name "Text")
+(lock name constraints)))
+(implementation
+(value Text
+(data  "NEEXISTUJE"))
+(initValue Text
+(data  ""))))
+(device 45 TOSTRING
+(properties
+(variableScope cont)
+(transactions 1 "WRITE TEXT a EOL"))
+(interface
+(input 1
+(name "A")
+(optional yes))
+(output 1
+(name "result")
+(lock name constraints)))
+(implementation
+(attr iopath string write "string"
+(readTerm "\n")
+(fs " ")
+(eol "\n")
+(multiField fullSyntax)
+(arrayFormat block))))
+(device 46 TOSTRING
+(properties
+(variableScope cont)
+(transactions 1 "WRITE TEXT a REAL64 FIX:2 EOL"))
+(interface
+(input 1
+(name "A")
+(optional yes))
+(output 1
+(name "result")
+(lock name constraints)))
+(implementation
+(attr iopath string write "string"
+(readTerm "\n")
+(fs " ")
+(eol "\n")
+(multiField fullSyntax)
+(arrayFormat block))))
+(device 47 LITERALCONSTANT
+(properties
+(name "Text")
+(variableScope cont)
+(enableEditing 1))
+(interface
+(output 1
+(name "Text")
+(lock name constraints)))
+(implementation
+(value Text
+(data  "KAROLÍNA LEDVINKOVÁ"))
+(initValue Text
+(data  ""))))
+(configuration
+(connect D1:0 D5:0)
+(connect D4:1 D5:1)
+(connect D1:1 D5:2)
+(connect D5:1 D6:0)
+(connect D4:1 D6:1)
+(connect D6:0 D7:0)
+(connect D9:1 D8:1)
+(connect D2:1 D8:2)
+(connect D7:1 D9:0)
+(connect D8:1 D10:1)
+(connect D12:1 D11:0)
+(connect D21:1 D11:1)
+(connect D21:1 D12:1)
+(connect D1:1 D13:1)
+(connect D12:1 D14:0)
+(connect D21:1 D14:1)
+(connect D12:1 D15:0)
+(connect D20:1 D15:1)
+(connect D12:1 D16:0)
+(connect D20:1 D16:1)
+(connect D7:2 D17:0)
+(connect D17:1 D18:1)
+(connect D3:1 D18:2)
+(connect D18:1 D19:1)
+(connect D8:1 D20:1)
+(connect D18:1 D20:2)
+(connect D10:1 D21:1)
+(connect D19:1 D21:2)
+(connect D1:1 D22:1)
+(connect D24:1 D23:1)
+(connect D26:1 D24:1)
+(connect D35:0 D24:2)
+(connect D25:1 D26:1)
+(connect D27:1 D26:2)
+(connect D41:1 D27:1)
+(connect D7:0 D28:0)
+(connect D28:0 D29:0)
+(connect D29:0 D30:0)
+(connect D34:1 D31:1)
+(connect D7:1 D32:0)
+(connect D7:2 D33:0)
+(connect D32:1 D34:1)
+(connect D33:1 D34:2)
+(connect D30:0 D35:0)
+(connect D42:1 D36:1)
+(connect D29:1 D36:2)
+(connect D30:1 D36:3)
+(connect D35:1 D36:4)
+(connect D38:1 D37:1)
+(connect D40:1 D39:1)
+(connect D36:1 D41:1)
+(connect D28:1 D42:1)))
+(contextCarrier
+(wndOrigin 2 2)
+(wndState res)
+(active detail)
+(detail
+(extent 1245 493)
+(anchorPt -1299 -411)
+(configuration
+(devCarrierFor 0
+(active open)
+(icon)
+(open
+(extent 238 29))
+(pinCenter 1940 620))
+(devCarrierFor 2
+(active open)
+(icon
+(extent 85 0))
+(open
+(extent 131 50))
+(terminals on)
+(pinCenter -20 40))
+(devCarrierFor 3
+(active icon)
+(icon
+(extent 26 15))
+(open
+(extent 84 196)
+(showFormat real))
+(pinCenter 290 350))
+(devCarrierFor 4
+(active icon)
+(icon
+(extent 26 15))
+(open
+(extent 84 376)
+(showFormat real))
+(pinCenter 290 520))
+(devCarrierFor 8
+(active icon)
+(icon
+(extent 68 51)
+(iconImage "loop.icn"))
+(open
+(extent 99 79))
+(pinCenter -180 120))
+(devCarrierFor 6
+(active open)
+(icon)
+(open
+(extent 134 106))
+(terminals on)
+(pinCenter -15 150))
+(devCarrierFor 9
+(active icon)
+(icon
+(extent 50 15))
+(open
+(extent 104 76))
+(terminals on)
+(pinCenter 10 260))
+(devCarrierFor 10
+(active open)
+(icon
+(extent 81 25))
+(open
+(extent 223 134))
+(terminals on)
+(pinCenter 5 370))
+(devCarrierFor 11
+(active open)
+(icon
+(extent 160 0))
+(open
+(extent 145 50))
+(terminals on)
+(pinCenter 450 340))
+(devCarrierFor 12
+(active icon)
+(icon
+(extent 70 51)
+(iconImage "loop.icn"))
+(open
+(extent 106 79))
+(pinCenter 230 330))
+(devCarrierFor 13
+(active open)
+(icon)
+(open
+(extent 221 74))
+(terminals on)
+(pinCenter 765 340))
+(devCarrierFor 14
+(active icon)
+(icon
+(extent 80 15))
+(open
+(extent 121 22))
+(pinCenter 1110 440))
+(devCarrierFor 15
+(active open)
+(icon)
+(open
+(extent 50 116))
+(terminals on)
+(pinCenter 1105 570))
+(devCarrierFor 16
+(active icon)
+(icon
+(extent 57 15))
+(open
+(extent 121 22))
+(pinCenter 180 70))
+(devCarrierFor 17
+(active open)
+(icon
+(extent 103 0))
+(open
+(extent 104 76))
+(terminals on)
+(pinCenter 1145 360))
+(devCarrierFor 18
+(active icon)
+(icon
+(extent 47 15))
+(open
+(extent 104 76))
+(terminals on)
+(pinCenter 1250 470))
+(devCarrierFor 19
+(active icon)
+(icon
+(extent 77 15))
+(open
+(extent 121 22))
+(pinCenter 1250 570))
+(devCarrierFor 20
+(active icon)
+(icon
+(extent 70 51)
+(iconImage "loop.icn"))
+(open
+(extent 99 79))
+(pinCenter 230 500))
+(devCarrierFor 21
+(active open)
+(icon
+(extent 160 0))
+(open
+(extent 145 50))
+(terminals on)
+(pinCenter 450 510))
+(devCarrierFor 22
+(active open)
+(icon)
+(open
+(extent 221 74))
+(terminals on)
+(pinCenter 765 560))
+(devCarrierFor 23
+(active icon)
+(icon
+(extent 26 25))
+(open)
+(terminals on)
+(pinCenter 630 420))
+(devCarrierFor 24
+(active icon)
+(icon
+(extent 26 25))
+(open)
+(terminals on)
+(pinCenter 990 440))
+(devCarrierFor 25
+(active icon)
+(icon
+(extent 97 15))
+(open
+(extent 104 76))
+(terminals on)
+(pinCenter 200 40))
+(devCarrierFor 26
+(active open)
+(icon
+(extent 68 0))
+(open
+(extent 404 76))
+(pinCenter 2020 700))
+(devCarrierFor 27
+(active icon)
+(icon
+(extent 164 44))
+(open
+(extent 95 54))
+(terminals on)
+(pinCenter 1720 700))
+(devCarrierFor 28
+(active icon)
+(icon
+(extent 50 15))
+(open
+(extent 237 74))
+(pinCenter 1540 660))
+(devCarrierFor 29
+(active icon)
+(icon
+(extent 26 25))
+(open)
+(terminals on)
+(pinCenter 1610 690))
+(devCarrierFor 30
+(active open)
+(icon)
+(open
+(extent 139 55))
+(terminals on)
+(pinCenter 1460 720))
+(devCarrierFor 31
+(active icon)
+(icon
+(extent 99 15))
+(open
+(extent 64 46))
+(terminals on)
+(pinCenter 1100 670))
+(devCarrierFor 32
+(active icon)
+(icon
+(extent 48 15))
+(open
+(extent 124 56))
+(terminals on)
+(pinCenter 1100 700))
+(devCarrierFor 33
+(active icon)
+(icon
+(extent 104 15))
+(open
+(extent 124 56))
+(terminals on)
+(pinCenter 1100 730))
+(devCarrierFor 35
+(active icon)
+(icon
+(extent 58 15))
+(open
+(extent 73 51))
+(terminals on)
+(pinCenter 310 420))
+(devCarrierFor 36
+(active icon)
+(icon
+(extent 26 15))
+(open
+(extent 80 29)
+(showFormat real))
+(pinCenter 210 400))
+(devCarrierFor 37
+(active icon)
+(icon
+(extent 26 15))
+(open
+(extent 80 29)
+(showFormat real))
+(pinCenter 210 440))
+(devCarrierFor 38
+(active icon)
+(icon
+(extent 26 25))
+(open)
+(terminals on)
+(pinCenter 250 420))
+(devCarrierFor 39
+(active icon)
+(icon
+(extent 59 15))
+(open
+(extent 124 56))
+(terminals on)
+(pinCenter 1100 760))
+(devCarrierFor 40
+(active icon)
+(icon
+(extent 26 45))
+(open)
+(terminals on)
+(pinCenter 1260 720))
+(devCarrierFor 41
+(active icon)
+(icon
+(extent 103 15))
+(open
+(extent 104 76))
+(terminals on)
+(pinCenter 300 120))
+(devCarrierFor 42
+(active icon)
+(icon
+(extent 80 15))
+(open
+(extent 174 29))
+(pinCenter 190 120))
+(devCarrierFor 43
+(active icon)
+(icon
+(extent 47 15))
+(open
+(extent 104 76))
+(terminals on)
+(pinCenter 280 150))
+(devCarrierFor 44
+(active icon)
+(icon
+(extent 80 15))
+(open
+(extent 174 29))
+(pinCenter 190 150))
+(devCarrierFor 45
+(active icon)
+(icon
+(extent 52 15))
+(open
+(extent 221 74))
+(terminals on)
+(pinCenter 1310 720))
+(devCarrierFor 46
+(active icon)
+(icon
+(extent 52 15))
+(open
+(extent 221 74))
+(terminals on)
+(pinCenter 1190 670))
+(devCarrierFor 47
+(active open)
+(icon)
+(open
+(extent 174 29))
+(pinCenter 1910 560))
+(connect D1:0 D5:0
+(points 2 -10 67 -10 76))
+(connect D4:1 D5:1
+(points 2 -144 120 -115 120))
+(connect D1:1 D5:2
+(points 6 98 40 120 40 120 230 -120 230 -120 180 -115 180))
+(connect D5:1 D6:0
+(points 5 94 120 110 120 110 220 10 220 10 250))
+(connect D4:1 D6:1
+(points 4 -144 120 -130 120 -130 260 -18 260))
+(connect D6:0 D7:0
+(points 2 10 270 10 282))
+(connect D9:1 D8:1
+(points 2 267 330 325 330))
+(connect D2:1 D8:2
+(points 2 305 350 325 350))
+(connect D7:1 D9:0
+(points 5 159 330 170 330 170 280 230 280 230 302))
+(connect D8:1 D10:1
+(points 2 575 340 612 340))
+(connect D12:1 D11:0
+(points 5 1172 540 1190 540 1190 420 1110 420 1110 430))
+(connect D21:1 D11:1
+(points 2 1005 440 1067 440))
+(connect D21:1 D12:1
+(points 4 1005 440 1030 440 1030 570 1047 570))
+(connect D1:1 D13:1
+(points 4 98 40 130 40 130 70 149 70))
+(connect D12:1 D14:0
+(points 7 1172 540 1190 540 1190 440 1250 440 1250 280 1140 280 1140 301))
+(connect D21:1 D14:1
+(points 4 1005 440 1030 440 1030 360 1050 360))
+(connect D12:1 D15:0
+(points 5 1172 540 1190 540 1190 440 1250 440 1250 460))
+(connect D20:1 D15:1
+(points 4 645 420 670 420 670 470 1224 470))
+(connect D12:1 D16:0
+(points 3 1172 540 1250 540 1250 560))
+(connect D20:1 D16:1
+(points 6 645 420 670 420 670 470 1200 470 1200 570 1209 570))
+(connect D7:2 D17:0
+(points 5 159 410 170 410 170 460 230 460 230 472))
+(connect D17:1 D18:1
+(points 2 267 500 325 500))
+(connect D3:1 D18:2
+(points 2 305 520 325 520))
+(connect D18:1 D19:1
+(points 4 575 510 590 510 590 560 612 560))
+(connect D8:1 D20:1
+(points 4 575 340 590 340 590 410 614 410))
+(connect D18:1 D20:2
+(points 4 575 510 600 510 600 430 614 430))
+(connect D10:1 D21:1
+(points 4 928 320 950 320 950 430 974 430))
+(connect D19:1 D21:2
+(points 4 928 540 950 540 950 450 974 450))
+(connect D1:1 D22:1
+(points 2 98 40 149 40))
+(connect D24:1 D23:1
+(points 2 1804 700 1815 700))
+(connect D26:1 D24:1
+(points 2 1625 690 1635 690))
+(connect D35:0 D24:2
+(points 5 1100 770 1100 790 1630 790 1630 710 1635 710))
+(connect D25:1 D26:1
+(points 4 1567 660 1580 660 1580 680 1594 680))
+(connect D27:1 D26:2
+(points 4 1572 720 1580 720 1580 700 1594 700))
+(connect D41:1 D27:1
+(points 2 1338 720 1348 720))
+(connect D7:0 D28:0
+(points 4 10 439 10 650 1100 650 1100 660))
+(connect D28:0 D29:0
+(points 2 1100 680 1100 690))
+(connect D29:0 D30:0
+(points 2 1100 710 1100 720))
+(connect D34:1 D31:1
+(points 2 265 420 278 420))
+(connect D7:1 D32:0
+(points 5 159 330 180 330 180 370 210 370 210 390))
+(connect D7:2 D33:0
+(points 5 159 410 170 410 170 420 210 420 210 430))
+(connect D32:1 D34:1
+(points 2 225 400 234 410))
+(connect D33:1 D34:2
+(points 2 225 440 234 430))
+(connect D30:0 D35:0
+(points 2 1100 740 1100 750))
+(connect D42:1 D36:1
+(points 4 1218 670 1230 670 1230 700 1244 700))
+(connect D29:1 D36:2
+(points 4 1126 700 1170 700 1170 710 1244 710))
+(connect D30:1 D36:3
+(points 4 1154 730 1170 730 1170 720 1244 720))
+(connect D35:1 D36:4
+(points 4 1132 760 1180 760 1180 730 1244 730))
+(connect D38:1 D37:1
+(points 2 232 120 246 120))
+(connect D40:1 D39:1
+(points 2 232 150 254 150))
+(connect D36:1 D41:1
+(points 2 1275 720 1281 720))
+(connect D28:1 D42:1
+(points 2 1152 670 1161 670)))
+(stackingOrder 1 5 13 22 6 7 9 8 34 31 2 18 3 20 10 38 37 39 40 12 36 41 27 25
+26 23 16 11 21 14 15 0 43 4 17 33 32 19 28 35 30 29 42 24))
+(numberFormats
+(realFormat standard)
+(realSigDigits 4)
+(realRadixSpec 4)
+(integerBase decimal))))
